@@ -32,4 +32,6 @@ SrcClsCode <- readRDS("Source_Classification_Code.rds")
      ## “Ext Comb /Electric Gen /Anthracite Coal /Pulverized Coal”.
 
 PM25_mean <- tapply(summPM25$Emissions, summPM25$year, mean)
-plot(PM25_mean)
+plot(as.numeric(names(PM25_mean)), PM25_mean, xlab = "Year", ylab = "Emissions",
+     type="o", col="red", pch=19)
+
