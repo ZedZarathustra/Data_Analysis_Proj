@@ -33,11 +33,11 @@ setwd("C:/Users/sdzwick/Documents/R/Coursera/4-Exploratory_Data_Analysis/Data_An
      ## “Ext Comb /Electric Gen /Anthracite Coal /Pulverized Coal”.
 
 ## Calculate mean for each year
-     PM25_mean <- tapply(summPM25$Emissions, summPM25$year, mean)
+     PM25_total <- tapply(summPM25$Emissions, summPM25$year, sum)
 
-## Plot mean
+## Plot total
      png(filename = "plot1.png", width = 480, height = 480)
-     plot(as.numeric(names(PM25_mean)), PM25_mean, xlab = "Year",
+     plot(as.numeric(names(PM25_total)), PM25_total, xlab = "Year",
           ylab = "Emissions (tons)", type="o", col="red", pch=19, 
           main="Emissions 1999, 2002, 2005, 2008")
      dev.off()
