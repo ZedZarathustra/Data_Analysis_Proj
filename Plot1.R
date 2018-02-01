@@ -8,7 +8,8 @@
 ## Author: Scott D. Zwick, 2018/01/31
 
 setwd("C:/Users/sdzwick/Documents/R/Coursera/4-Exploratory_Data_Analysis/Data_Analysis_Proj")
-summPM25 <- readRDS("summarySCC_PM25.rds")
+## read files
+     summPM25 <- readRDS("summarySCC_PM25.rds")
      ## This file contains a data frame with all of the PM2.5 emissions data for
      ## 1999, 2002, 2005, and 2008. For each year, the table contains number
      ## of tons of PM2.5 emitted from a specific type of source for the
@@ -23,7 +24,7 @@ summPM25 <- readRDS("summarySCC_PM25.rds")
      ## type: The type of source (point, non-point, on-road, or non-road)
      ## year: The year of emissions recorded
 
-SrcClsCode <- readRDS("Source_Classification_Code.rds")
+     SrcClsCode <- readRDS("Source_Classification_Code.rds")
      ## This table provides a mapping from the SCC digit strings in the
      ## Emissions table to the actual name of the PM2.5 source. The sources
      ## are categorized in a few different ways from more general to more
@@ -31,7 +32,13 @@ SrcClsCode <- readRDS("Source_Classification_Code.rds")
      ## are most useful. For example, source “10100101” is known as
      ## “Ext Comb /Electric Gen /Anthracite Coal /Pulverized Coal”.
 
-PM25_mean <- tapply(summPM25$Emissions, summPM25$year, mean)
-plot(as.numeric(names(PM25_mean)), PM25_mean, xlab = "Year", ylab = "Emissions",
-     type="o", col="red", pch=19)
+## Calculate mean for each year
+     PM25_mean <- tapply(summPM25$Emissions, summPM25$year, mean)
+
+## Plot mean
+     png(filename = "plot1.png", width = 480, height = 480)
+     plot(as.numeric(names(PM25_mean)), PM25_mean, xlab = "Year",
+          ylab = "Emissions (tons)", type="o", col="red", pch=19, 
+          main="Emissions 1999, 2002, 2005, 2008")
+     dev.off()
 
