@@ -38,10 +38,13 @@ SrcClsCode <- readRDS("Source_Classification_Code.rds")
 PM25_Balt <- subset(summPM25, summPM25$fips==24510)
 
 ## Subset by type
-PM_25_Balt_pt <- subset(PM25_Balt, PM25_Balt$type=="POINT")
-PM_25_Balt_npt <- subset(PM25_Balt, PM25_Balt$type=="NONPOINT")
-PM_25_Balt_rd <- subset(PM25_Balt, PM25_Balt$type=="ON-ROAD")
-PM_25_Balt_nrd <- subset(PM25_Balt, PM25_Balt$type=="NON-ROAD")
+PM25_Balt_pt <- subset(PM25_Balt, PM25_Balt$type=="POINT")
+PM25_Balt_npt <- subset(PM25_Balt, PM25_Balt$type=="NONPOINT")
+PM25_Balt_rd <- subset(PM25_Balt, PM25_Balt$type=="ON-ROAD")
+PM25_Balt_nrd <- subset(PM25_Balt, PM25_Balt$type=="NON-ROAD")
 
-## Calculate total for each year
-PM25_Balt_tot<- tapply(PM25_Balt$Emissions, PM25_Balt$year, PM25_Balt$type, sum)
+## Calculate total for each type by year
+PM25_B_Pt<- tapply(PM25_Balt_pt$Emissions, PM25_Balt_pt$year, sum)
+PM25_B_Npt<- tapply(PM25_Balt_npt$Emissions, PM25_Balt_npt$year, sum)
+PM25_B_Rd<- tapply(PM25_Balt_rd$Emissions, PM25_Balt_rd$year, sum)
+PM25_B_Nrd<- tapply(PM25_Balt_nrd$Emissions, PM25_Balt_nrd$year, sum)
