@@ -38,8 +38,11 @@ SrcClsCode <- readRDS("Source_Classification_Code.rds")
      PM25_Balt_tot<- tapply(PM25_Balt$Emissions, PM25_Balt$year, sum)
 
 ## Plot total
-png(filename = "plot2.png", width = 480, height = 480)
-plot(as.numeric(names(PM25_Balt_tot)), PM25_Balt_tot, xlab = "Year",
-     ylab = "Emissions (tons)", type="o", col="red", pch=19, 
-     main="Emissions: Baltimore, MD 1999, 2002, 2005, 2008")
-dev.off()
+     png(filename = "plot2.png", width = 480, height = 480)
+     plot(as.numeric(names(PM25_Balt_tot)), PM25_Balt_tot,
+          xlab = "Year", ylab = "Emissions (tons)",
+          type="o", col="red", pch=19, ylim=c(1800,3400),
+          main="Emissions: Baltimore, MD 1999, 2002, 2005, 2008")
+     text(x=as.numeric(names(PM25_Balt_tot)), PM25_Balt_tot,
+          label=names(PM25_Balt_tot), pos=1)
+     dev.off()
