@@ -37,8 +37,12 @@ setwd("C:/Users/sdzwick/Documents/R/Coursera/4-Exploratory_Data_Analysis/Data_An
 
 ## Plot total
      png(filename = "plot1.png", width = 480, height = 480)
-     plot(as.numeric(names(PM25_total)), PM25_total, xlab = "Year",
-          ylab = "Emissions (tons)", type="o", col="red", pch=19, 
-          main="Emissions 1999, 2002, 2005, 2008")
+     plot(as.numeric(names(PM25_total)), PM25_total, 
+          xlab = "Year", ylab = "PM2.5 Emissions (tons)", 
+          type="o", col="red", pch=19,
+          ylim=c(3250000,7500000),
+          main="PM2.5 Emissions 1999, 2002, 2005, 2008")
+     text(x=as.numeric(names(PM25_total)), PM25_total, label=names(PM25_total),
+          pos=1)
      dev.off()
 
