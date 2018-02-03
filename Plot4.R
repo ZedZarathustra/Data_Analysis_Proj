@@ -36,4 +36,4 @@ SCCode <- readRDS("Source_Classification_Code.rds")
 ## Build dataframe
 coalsrc <- filter(SCCode, str_detect(SCCode$Short.Name, "Coal"))
 coalsrc <- coalsrc[,1]
-                  
+PM25_coal <- subset(summPM25, SCC %in% coalsrc)
