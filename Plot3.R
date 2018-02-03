@@ -36,39 +36,40 @@ SrcClsCode <- readRDS("Source_Classification_Code.rds")
 
 
 ## Subset Baltimore City, Maryland
-PM25_Balt <- subset(summPM25, summPM25$fips==24510)
+     PM25_Balt <- subset(summPM25, summPM25$fips==24510)
 
 ## Subset by type
-PM25_Balt_pt <- subset(PM25_Balt, PM25_Balt$type=="POINT")
-PM25_Balt_npt <- subset(PM25_Balt, PM25_Balt$type=="NONPOINT")
-PM25_Balt_rd <- subset(PM25_Balt, PM25_Balt$type=="ON-ROAD")
-PM25_Balt_nrd <- subset(PM25_Balt, PM25_Balt$type=="NON-ROAD")
+     PM25_Balt_pt <- subset(PM25_Balt, PM25_Balt$type=="POINT")
+     PM25_Balt_npt <- subset(PM25_Balt, PM25_Balt$type=="NONPOINT")
+     PM25_Balt_rd <- subset(PM25_Balt, PM25_Balt$type=="ON-ROAD")
+     PM25_Balt_nrd <- subset(PM25_Balt, PM25_Balt$type=="NON-ROAD")
 
 ## Calculate total for each type by year
-PM25_B_Pt<- tapply(PM25_Balt_pt$Emissions, PM25_Balt_pt$year, sum)
-PM25_B_Npt<- tapply(PM25_Balt_npt$Emissions, PM25_Balt_npt$year, sum)
-PM25_B_Rd<- tapply(PM25_Balt_rd$Emissions, PM25_Balt_rd$year, sum)
-PM25_B_Nrd<- tapply(PM25_Balt_nrd$Emissions, PM25_Balt_nrd$year, sum)
+     PM25_B_Pt<- tapply(PM25_Balt_pt$Emissions, PM25_Balt_pt$year, sum)
+     PM25_B_Npt<- tapply(PM25_Balt_npt$Emissions, PM25_Balt_npt$year, sum)
+     PM25_B_Rd<- tapply(PM25_Balt_rd$Emissions, PM25_Balt_rd$year, sum)
+     PM25_B_Nrd<- tapply(PM25_Balt_nrd$Emissions, PM25_Balt_nrd$year, sum)
 
 
 ## Combine files
-year <- names(PM25_B_Pt)
-PM25_B_Pt2 <- data.frame(year, PM25_B_Pt)
-PM25_B_Pt2$type <- "POINT"
-colnames(PM25_B_Pt2)[2] <- "Emissions" 
-PM25_B_Npt2 <- data.frame(year, PM25_B_Npt)
-PM25_B_Npt2$type <- "NONPOINT"
-colnames(PM25_B_Npt2)[2] <- "Emissions" 
-PM25_B_Rd2 <- data.frame(year, PM25_B_Rd)
-PM25_B_Rd2$type <- "ON-ROAD"
-colnames(PM25_B_Rd2)[2] <- "Emissions" 
-PM25_B_Nrd2 <- data.frame(year, PM25_B_Nrd)
-PM25_B_Nrd2$type <- "NON-ROAD"
-colnames(PM25_B_Nrd2)[2] <- "Emissions" 
-PM25_B_Tot <- rbind(PM25_B_Pt2, PM25_B_Npt2, PM25_B_Rd2, PM25_B_Nrd2)
-rownames(PM25_B_Tot) <- c()
+     year <- names(PM25_B_Pt)
+     PM25_B_Pt2 <- data.frame(year, PM25_B_Pt)
+     PM25_B_Pt2$type <- "POINT"
+     colnames(PM25_B_Pt2)[2] <- "Emissions" 
+     PM25_B_Npt2 <- data.frame(year, PM25_B_Npt)
+     PM25_B_Npt2$type <- "NONPOINT"
+     colnames(PM25_B_Npt2)[2] <- "Emissions" 
+     PM25_B_Rd2 <- data.frame(year, PM25_B_Rd)
+     PM25_B_Rd2$type <- "ON-ROAD"
+     colnames(PM25_B_Rd2)[2] <- "Emissions" 
+     PM25_B_Nrd2 <- data.frame(year, PM25_B_Nrd)
+     PM25_B_Nrd2$type <- "NON-ROAD"
+     colnames(PM25_B_Nrd2)[2] <- "Emissions" 
+     PM25_B_Tot <- rbind(PM25_B_Pt2, PM25_B_Npt2, PM25_B_Rd2, PM25_B_Nrd2)
+     rownames(PM25_B_Tot) <- c()
 
 ## Plot
-plt <- ggplot(PM25_B_Tot, aes(year, Emissions))
-plt + geom_col(aes(fill = factor(year))) + facet_grid(. ~ type)
-
+     png(filename = "plot3.png", width = 480, height = 480)
+     plt <- ggplot(PM25_B_Tot, aes(year, Emissions))
+     plt + geom_col(aes(fill = year)) + facet_grid(. ~ type)
+     dev.off()
