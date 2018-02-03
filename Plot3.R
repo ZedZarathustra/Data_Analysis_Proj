@@ -8,6 +8,7 @@
 ##
 ## Author: Scott D. Zwick, 2018/01/31
 
+library(ggplot2)
 setwd("C:/Users/sdzwick/Documents/R/Coursera/4-Exploratory_Data_Analysis/Data_Analysis_Proj")
 ## read files
 summPM25 <- readRDS("summarySCC_PM25.rds")
@@ -48,3 +49,27 @@ PM25_B_Pt<- tapply(PM25_Balt_pt$Emissions, PM25_Balt_pt$year, sum)
 PM25_B_Npt<- tapply(PM25_Balt_npt$Emissions, PM25_Balt_npt$year, sum)
 PM25_B_Rd<- tapply(PM25_Balt_rd$Emissions, PM25_Balt_rd$year, sum)
 PM25_B_Nrd<- tapply(PM25_Balt_nrd$Emissions, PM25_Balt_nrd$year, sum)
+
+
+## Combine files
+year <- names(PM25_B_Pt)
+PM25_B_Pt2 <- data.frame(year, PM25_B_Pt)
+PM25_B_Pt2$type <- "POINT"
+colnames(PM25_B_Pt2)[2] <- "Emissions" 
+PM25_B_Npt2 <- data.frame(year, PM25_B_Npt)
+PM25_B_Npt2$type <- "NONPOINT"
+colnames(PM25_B_Npt2)[2] <- "Emissions" 
+PM25_B_Rd2 <- data.frame(year, PM25_B_Rd)
+PM25_B_Rd2$type <- "ON-ROAD"
+colnames(PM25_B_Rd2)[2] <- "Emissions" 
+PM25_B_Nrd2 <- data.frame(year, PM25_B_Nrd)
+PM25_B_Nrd2$type <- "NON-ROAD"
+colnames(PM25_B_Nrd2)[2] <- "Emissions" 
+PM25_B_Tot <- rbind(PM25_B_Pt2, PM25_B_Npt2, PM25_B_Rd2, PM25_B_Nrd2)
+rownames(PM25_B_Tot) <- c()
+
+## Plot
+
+
+ggplot(PM25_Balt, aes(tapply(PM25_Balt$Emissions, PM25_Balt$year, sum)))
+
