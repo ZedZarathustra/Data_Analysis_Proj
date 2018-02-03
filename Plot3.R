@@ -1,4 +1,4 @@
-## Exploratory_Data_Analysis - Course Project - Plot 2
+## Exploratory_Data_Analysis - Course Project - Plot 3
 ## 
 ## Of the four types of sources indicated by the type (point, nonpoint,
 ## onroad, nonroad) variable, which of these four sources have seen decreases
