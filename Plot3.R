@@ -69,7 +69,6 @@ PM25_B_Tot <- rbind(PM25_B_Pt2, PM25_B_Npt2, PM25_B_Rd2, PM25_B_Nrd2)
 rownames(PM25_B_Tot) <- c()
 
 ## Plot
-
-
-ggplot(PM25_Balt, aes(tapply(PM25_Balt$Emissions, PM25_Balt$year, sum)))
+plt <- ggplot(PM25_B_Tot, aes(year, Emissions))
+plt + geom_col(aes(fill = factor(year))) + facet_grid(. ~ type)
 
