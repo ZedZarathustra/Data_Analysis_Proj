@@ -32,3 +32,18 @@ SCCode <- readRDS("Source_Classification_Code.rds")
 ## specific and you may choose to explore whatever categories you think
 ## are most useful. For example, source “10100101” is known as
 ## “Ext Comb /Electric Gen /Anthracite Coal /Pulverized Coal”.
+
+## Subset Baltimore City, Maryland
+PM25_Balt <- subset(summPM25, summPM25$fips==24510)
+PM25_Balt <- subset(PM25_Balt, PM25_Balt$type=="ON-ROAD")
+
+## Plot
+##png(filename = "plot5.png", width = 480, height = 480)
+plot(as.numeric(names(PM25_coal_tot)), PM25_coal_tot, 
+     xlab = "Year", ylab = "PM2.5 Emissions (tons)", 
+     type="o", col="red", pch=19,
+     ylim=c(325000,600000),
+     main="PM2.5 Emissions from Coal for 1999, 2002, 2005, 2008")
+text(x=as.numeric(names(PM25_coal_tot)), PM25_coal_tot, 
+     label=names(PM25_coal_tot), pos=1)
+##dev.off()
