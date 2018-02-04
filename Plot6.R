@@ -41,7 +41,7 @@ PM25_Balt <- subset(PM25_Balt, PM25_Balt$type=="ON-ROAD")
 PM25_Balt_tot <- tapply(PM25_Balt$Emissions, PM25_Balt$year, sum)
 
 ## Subset Los Angeles, California
-PM25_LA <- subset(summPM25, summPM25$fips==24510)
+PM25_LA <- subset(summPM25, summPM25$fips=="06037")
 PM25_LA <- subset(PM25_LA, PM25_LA$type=="ON-ROAD")
 PM25_LA_tot <- tapply(PM25_LA$Emissions, PM25_LA$year, sum)
 
@@ -49,9 +49,12 @@ PM25_LA_tot <- tapply(PM25_LA$Emissions, PM25_LA$year, sum)
 ##png(filename = "plot6.png", width = 480, height = 480)
 plot(as.numeric(names(PM25_Balt_tot)), PM25_Balt_tot, 
      xlab = "Year", ylab = "PM2.5 Emissions (tons)", 
-     ylim=c(50,350),
+     ylim=c(50,4700),
      type="o", col="red", pch=19,
      main=paste("PM2.5 Emissions from Motor Vehicles in Baltimore", "\n", "for 1999, 2002, 2005, 2008"))
+lines(as.numeric(names(PM25_LA_tot)), PM25_LA_tot, type="o", col="blue")
+text(x=as.numeric(names(PM25_LA_tot)), PM25_LA_tot, 
+     label=names(PM25_LA_tot), pos=1)
 text(x=as.numeric(names(PM25_Balt_tot)), PM25_Balt_tot, 
      label=names(PM25_Balt_tot), pos=1)
 ##dev.off()
