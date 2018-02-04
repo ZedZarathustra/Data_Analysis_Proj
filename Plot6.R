@@ -46,15 +46,17 @@ PM25_LA <- subset(PM25_LA, PM25_LA$type=="ON-ROAD")
 PM25_LA_tot <- tapply(PM25_LA$Emissions, PM25_LA$year, sum)
 
 ## Plot
-##png(filename = "plot6.png", width = 480, height = 480)
+png(filename = "plot6.png", width = 480, height = 480)
 plot(as.numeric(names(PM25_Balt_tot)), PM25_Balt_tot, 
      xlab = "Year", ylab = "PM2.5 Emissions (tons)", 
+     axes = FALSE,
      ylim=c(50,4700),
-     type="o", col="red", pch=19,
-     main=paste("PM2.5 Emissions from Motor Vehicles in Baltimore", "\n", "for 1999, 2002, 2005, 2008"))
-lines(as.numeric(names(PM25_LA_tot)), PM25_LA_tot, type="o", col="blue")
-text(x=as.numeric(names(PM25_LA_tot)), PM25_LA_tot, 
-     label=names(PM25_LA_tot), pos=1)
-text(x=as.numeric(names(PM25_Balt_tot)), PM25_Balt_tot, 
-     label=names(PM25_Balt_tot), pos=1)
-##dev.off()
+     type="o", col="red", pch=19, lwd = 2,
+     main=paste("PM2.5 Emissions from Motor Vehicles", "\n",
+          "in Baltimore and Los Angeles", "\n", "for 1999, 2002, 2005, 2008"))
+axis(1, at=c(1999, 2002, 2005, 2008))
+axis(2, at=c(0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500), las = 2)
+lines(as.numeric(names(PM25_LA_tot)), PM25_LA_tot, type="o", col="blue", lwd = 2)
+legend(1999, 2500, legend = c("Baltimore", "Los Angeles"), 
+       col = c("red", "blue"), lty = 1, lwd = 2)
+dev.off()
