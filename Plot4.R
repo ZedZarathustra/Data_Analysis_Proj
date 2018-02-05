@@ -42,10 +42,11 @@ PM25_coal_tot <- tapply(PM25_coal$Emissions, PM25_coal$year, sum)
 ## Plot
 png(filename = "plot4.png", width = 480, height = 480)
 plot(as.numeric(names(PM25_coal_tot)), PM25_coal_tot, 
+     axes = FALSE,
      xlab = "Year", ylab = "PM2.5 Emissions (tons)", 
-     type="o", col="red", pch=19,
-     ylim=c(325000,600000),
+     type="o", lwd=2, col="red", pch=19,
+     ylim=c(300000,600000),
      main="PM2.5 Emissions from Coal for 1999, 2002, 2005, 2008")
-text(x=as.numeric(names(PM25_coal_tot)), PM25_coal_tot, 
-     label=names(PM25_coal_tot), pos=1)
+axis(1, at=c(1999, 2002, 2005, 2008))
+axis(2, at=c(300000, 400000, 500000, 600000))
 dev.off()

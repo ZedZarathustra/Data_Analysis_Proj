@@ -41,8 +41,10 @@ SrcClsCode <- readRDS("Source_Classification_Code.rds")
      png(filename = "plot2.png", width = 480, height = 480)
      plot(as.numeric(names(PM25_Balt_tot)), PM25_Balt_tot,
           xlab = "Year", ylab = "Emissions (tons)",
-          type="o", col="red", pch=19, ylim=c(1800,3400),
+          axes = FALSE,
+          type="o", lwd=2, col="red", pch=19, 
+          ylim=c(1500,3500),
           main="Emissions: Baltimore, MD 1999, 2002, 2005, 2008")
-     text(x=as.numeric(names(PM25_Balt_tot)), PM25_Balt_tot,
-          label=names(PM25_Balt_tot), pos=1)
+     axis(1, at=c(1999, 2002, 2005, 2008))
+     axis(2, at=c(1500, 2000, 2500, 3000, 3500))
      dev.off()

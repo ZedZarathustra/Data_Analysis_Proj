@@ -3,7 +3,7 @@
 ## How have emissions from motor vehicle sources changed from 1999–2008 in
 ## Baltimore City (fips == 24510)?
 ##
-## Author: Scott D. Zwick, 2018/01/31
+## Author: Scott D. Zwick, 2018/02/03
 
 library(dplyr)
 library(stringr)
@@ -41,10 +41,11 @@ PM25_Balt_tot <- tapply(PM25_Balt$Emissions, PM25_Balt$year, sum)
 ## Plot
 png(filename = "plot5.png", width = 480, height = 480)
 plot(as.numeric(names(PM25_Balt_tot)), PM25_Balt_tot, 
+     axes=FALSE,
      xlab = "Year", ylab = "PM2.5 Emissions (tons)", 
      ylim=c(50,350),
-     type="o", col="red", pch=19,
+     type="o", lwd=2, col="red", pch=19,
      main=paste("PM2.5 Emissions from Motor Vehicles in Baltimore", "\n", "for 1999, 2002, 2005, 2008"))
-text(x=as.numeric(names(PM25_Balt_tot)), PM25_Balt_tot, 
-     label=names(PM25_Balt_tot), pos=1)
+axis(1, at=c(1999, 2002, 2005, 2008))
+axis(2, at=c(50, 100, 150, 200, 250, 300, 350))
 dev.off()
